@@ -13,7 +13,9 @@ files = [
   REQUIRE,
   REQUIRE_ADAPTER,  
 
-  { pattern: 'app/components/**/*.js', included: false },
+  { pattern: 'app/components/crafty/release/0.5.4/crafty.js', included: false },
+  { pattern: 'app/components/jquery/jquery.min.js', included: false },
+  { pattern: 'app/components/underscore/underscore-min.js', included: false },
   { pattern: 'app/scripts/**/*.js', included: false },
   { pattern: 'test/**/*Spec.js', included: false },
 
@@ -27,9 +29,19 @@ exclude = [
 ];
 
 
+preprocessors = {
+  'app/scripts/**/*.js': 'coverage'
+};
+
+
 // test results reporter to use
 // possible values: 'dots', 'progress', 'junit'
-reporters = ['progress'];
+reporters = ['progress', 'coverage'];
+
+coverageReporter = {
+  type : 'html',
+  dir : 'coverage/'
+}
 
 
 // web server port
@@ -70,4 +82,4 @@ captureTimeout = 60000;
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
-singleRun = false;
+singleRun = true;

@@ -2,6 +2,7 @@ app/components
 node_modules/
 temp/
 dist/
+coverage/
 
 .idea/
 *.iml

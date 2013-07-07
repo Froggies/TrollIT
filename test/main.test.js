@@ -8,13 +8,17 @@ requirejs.config({
 
   paths: {
     "components": "../components",
-    "jquery": "../components/jquery/jquery",
-    'underscore': '../components/underscore/underscore',      
+    "jquery": "../components/jquery/jquery.min",
+    'underscore': '../components/underscore/underscore-min',
+    'crafty': '../components/crafty/release/0.5.4/crafty'
   },
 
   shim: {
-    'underscore' : {
+    'underscore': {
       exports: '_'
+    },
+    'crafty': {
+      exports: 'Crafty'
     }
   },
 

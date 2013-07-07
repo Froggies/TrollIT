@@ -9,6 +9,6 @@
     "requirejs": "~2.1.5",
     "jquery": ">= 2.0.0",
     "underscore" : ">= 1.4.4",
-    "crafty" : ">= 0.5.4" 
+    "crafty" : "https://github.com/craftyjs/craftyjs.github.com.git"
   }
 }
