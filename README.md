@@ -1,4 +1,4 @@
-TrollIT ?
+TrollIT ? [![Build Status](https://travis-ci.org/Froggies/TrollIT.png?branch=master)](https://travis-ci.org/Froggies/TrollIT)
 =========
 
 TrollIT is a 2D management/strategy game starring a software development company.
