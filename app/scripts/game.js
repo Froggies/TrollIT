@@ -1,4 +1,5 @@
-define(['character', 'crafty', 'underscore'], function (character, Crafty, _) {
+define(['character', 'crafty', 'underscore', 'popupManager'], 
+  function (character, Crafty, _, popupManager) {
 
   'use strict';
 
@@ -22,6 +23,8 @@ define(['character', 'crafty', 'underscore'], function (character, Crafty, _) {
         x: 50,
         y: 50
       });
+
+      new popupManager().showPopup("Troll IT est un gros TROLL :D");
     };
 
     Game.prototype.stop = function () {
