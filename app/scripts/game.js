@@ -1,5 +1,5 @@
-define(['character', 'crafty', 'underscore', 'popupManager'], 
-  function (character, Crafty, _, popupManager) {
+define(['character', 'crafty', 'underscore', 'popupManager', 'start'], 
+  function (character, Crafty, _, popupManager, StartScene) {
 
   'use strict';
 
@@ -19,12 +19,8 @@ define(['character', 'crafty', 'underscore', 'popupManager'],
       Crafty.init(800, 600);
       Crafty.background('rgb(249, 223, 125)');
 
-      Crafty.e('Character').attr({
-        x: 50,
-        y: 50
-      });
-
-      new popupManager().showPopup("Troll IT est un gros TROLL :D");
+      var scene = new StartScene();
+      scene.begin();
     };
 
     Game.prototype.stop = function () {
@@ -36,12 +32,12 @@ define(['character', 'crafty', 'underscore', 'popupManager'],
      */
     Game.prototype.showFPS = function () {
       if (_.isUndefined(this.fpsE)) {
-        this.fpsE = Crafty.e("2D, DOM, FPS, Text");
+        this.fpsE = Crafty.e('2D, DOM, FPS, Text');
         this.fpsE.attr({
           maxValues: 10
         });
-        this.fpsE.bind("MessureFPS", function (fps) {
-          this.text("FPS" + fps.value);
+        this.fpsE.bind('MessureFPS', function (fps) {
+          this.text('FPS' + fps.value);
         });
       } else {
         this.toggleFPS();
@@ -50,7 +46,7 @@ define(['character', 'crafty', 'underscore', 'popupManager'],
 
     Game.prototype.toggleFPS = function () {
       if (!_.isUndefined(this.fpsE)) {
-        this.fpsE.toggleComponent("2D, DOM, FPS, Text");
+        this.fpsE.toggleComponent('2D, DOM, FPS, Text');
       }
     };
 
