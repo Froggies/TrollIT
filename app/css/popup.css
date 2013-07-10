@@ -8,7 +8,7 @@
   opacity: 0.3;
 }
 
-.popup {
+#popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -38,6 +38,7 @@
   text-align: center;
   border: 3px outset;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .popup-content {

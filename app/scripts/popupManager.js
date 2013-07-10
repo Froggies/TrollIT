@@ -4,7 +4,7 @@ define(['jquery'], function ($) {
 
   var template = [
     '<div id="glass"></div>',
-    '<div class="popup">',
+    '<div id="popup">',
     '<div class="popup-header">',
     '{{title}}',//3
     '<span class="popup-header-button">X</span>',
@@ -14,7 +14,7 @@ define(['jquery'], function ($) {
     '{{content}}',//8
     '</div>',
     '<div class="popup-footer">',
-    '<div class="popup-footer-button">Valider</div>',
+    '<div class="popup-footer-button popup-footer-button-valider">Valider</div>',
     '</div>',
     '</div>'    
   ];
@@ -24,6 +24,14 @@ define(['jquery'], function ($) {
     compiled[3] = title;
     compiled[8] = content;
     return compiled.join('');
+  }
+
+  function hide(callback) {
+    $('#glass').remove();
+    $('#popup').remove();
+    if (callback) {
+      callback();
+    }
   }
 
   return (function () {
@@ -36,11 +44,26 @@ define(['jquery'], function ($) {
     }
 
     /**
-     * End of game
+     * Display sentence
      */
-    PopupManager.prototype.showPopup = function (sentence) {
+    PopupManager.prototype.showPopup = function (sentence, callback) {
       $(document.body).append(compileTemplate('infos', sentence));
+      $('#popup .popup-header .popup-header-button').unbind().click(function () {
+        hide(callback);
+      });
+      $('#popup .popup-footer .popup-footer-button-valider').unbind().click(function () {
+        hide(callback);
+      });
     };
+
+    /**
+     * Display choises
+     * 
+     * 
+     */
+    // PopupManager.prototype.showChoises = function (choises) {
+    //   choises.
+    // };
 
     return PopupManager;
 
