@@ -29,7 +29,7 @@ define(['jquery', 'underscore'], function ($, _) {
   }
 
   function showNext() {
-    if(isShowingPopup === false && waitingPopups.length > 0) {
+    if (isShowingPopup === false && waitingPopups.length > 0) {
       isShowingPopup = true;
       var data = _.first(waitingPopups);
       waitingPopups = _.rest(waitingPopups);
@@ -57,20 +57,29 @@ define(['jquery', 'underscore'], function ($, _) {
 
     /**
      * Display sentence
+     * sentence : the sentence to display
+     * callback : optional callback function with no params
      */
     showPopup: function (sentence, callback) {
       waitingPopups.push({title: 'infos', sentence: sentence, callback: callback});
       showNext();
-    }
+    },
 
     /**
      * Display choises
-     * 
-     * 
+     * Display multiples choises
+     * choises : array of object { value: val, display: label }
+     * callback : optional callback function with value param
      */
-    // PopupManager.prototype.showChoises = function (choises) {
-    //   choises.
-    // };
+    showChoises: function (choises, callback) {
+      var sentence = '<ul>';
+      _.each(choises, function (choise) {
+        sentence += '<li style="list-style:none"><input type="radio" name="radio">' + choise + '</li>';
+      });
+      sentence += '</ul>';
+      waitingPopups.push({title: 'infos', sentence: sentence, callback: callback});
+      showNext();
+    }
 
   };
 });
