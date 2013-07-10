@@ -12,23 +12,39 @@ define(['crafty', 'character', 'underscore', 'jquery'], function (Crafty, charac
         console.log('beginning scene 1');
         self.characters = self.createCharacters(['Robert', 'Mélanie', 'Eric', 'Aurélie', 'David']);
 
-        self.characters[0].dialog.append('<p class="char-dialog">Bon c\' est décidé je vais créer ma boite et je vais leur montrer moi !<p>');
+        var transition = Crafty.e('HTML, Delay').attr({
+          x: 1 * 40 + 100,
+          y: 1 * 60 + 10
+        });
 
-        self.characters[1].dialog.delay(function () {
-          self.characters[1].dialog.append('<p class="char-dialog">Ouais !<p>');
-        }, 2000);
-
-        self.characters[3].dialog.delay(function () {
-          self.characters[3].dialog.append('<p class="char-dialog">Trololol !<p>');
-        }, 2000);
-
-        self.characters[4].dialog.delay(function () {
-          self.characters[4].dialog.append('<p class="char-dialog">Tu vas travailler où ?<p>');
+        transition.delay(function() {
+          _.each(self.characters, function(char) {
+             char.entity.visible = false;
+             char.dialog.visible = false;
+          });
+          this.append('<p class="announcement">C\'est comme ca que débuta le début d\'une... grosse galère</p>');
         }, 4000);
 
+        self.characters[0].dialog.append('<p class="char-dialog">Bon c\' est décidé je vais créer ma boite et je vais leur montrer moi !</p>');
+
+        self.characters[1].dialog.delay(function () {
+          this.append('<p class="char-dialog">Ouais !<p>');
+        }, 1000);
+
+        self.characters[3].dialog.delay(function () {
+          this.append('<p class="char-dialog">Trololol !<p>');
+          self.characters[0].dialog.replace('');
+        }, 1500);
+
+        self.characters[4].dialog.delay(function () {
+          this.append('<p class="char-dialog">Tu vas travailler où ?<p>');
+          self.characters[1].dialog.replace('');
+          self.characters[3].dialog.replace('');
+        }, 2000);
+
         self.characters[0].dialog.delay(function () {
-          self.characters[0].dialog.replace('<p class="char-dialog">Dans mon garage ...<p>');
-        }, 6000);
+          this.replace('<p class="char-dialog">Dans mon garage ...<p>');
+        }, 3000);
       });
     }
 
