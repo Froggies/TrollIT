@@ -38,8 +38,13 @@ define(['jquery', 'underscore'], function ($, _) {
     /**
      * End of game
      */
+<<<<<<< HEAD
     PopupManager.prototype.showPopup = function(sentence) {
       $(document.body).append(compileTemplate('infos', sentence));
+=======
+    PopupManager.prototype.showPopup = function (sentence) {
+      window.alert(sentence);
+>>>>>>> aaa309fe028141023d194a8a1e0b10d4ca1880d9
     };
 
     return PopupManager;

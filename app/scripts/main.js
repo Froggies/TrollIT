@@ -24,16 +24,6 @@ require(['game'], function (Game) {
   game.start();
   game.showFPS();
 
-  //@vivian tu commences à troller avec des trucs qui servent à rien :D ?
-  window.setTimeout(function() {
-    game.hideFPS();
-  }, 500);
-
-
-  window.setTimeout(function() {
-    game.showFPS();
-  }, 1500);
-
 });
 
 
