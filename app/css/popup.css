@@ -1,0 +1,57 @@
+#glass {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: black;
+  opacity: 0.3;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 200px;
+  min-height: 100px;
+  background-color: #BEC1BD;
+  border: 3px outset;
+}
+
+.popup-header {
+  line-height: 30px;
+  background-color: #0003CC;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+.popup-header-button, .popup-footer-button {
+  float: right;
+  background-color: #D5D4CB;
+  color: black;
+  line-height: 12px;
+  margin-top: 4px;
+  margin-right: 2px;
+  min-width: 16px;
+  text-align: center;
+  border: 3px outset;
+  font-size: 12px;
+}
+
+.popup-content {
+  padding: 5px;
+  font-size: 14px;
+  border-top: 1px solid #fff;
+}
+
+.popup-footer {
+  padding: 10px;
+}
+
+.popup-footer-button {
+  padding: 5px;
+  display: inline;
+  margin: 0;
+}
