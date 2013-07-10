@@ -1,5 +1,5 @@
 define(['character', 'crafty', 'underscore', 'popupManager', 'start'], 
-  function (character, Crafty, _, popupManager, StartScene) {
+  function (character, Crafty, _, PopupManager, StartScene) {
 
   'use strict';
 
@@ -21,6 +21,8 @@ define(['character', 'crafty', 'underscore', 'popupManager', 'start'],
 
       var scene = new StartScene();
       scene.begin();
+
+      new PopupManager().showPopup('TrollIT est un gros TROLL !');
     };
 
     Game.prototype.stop = function () {
