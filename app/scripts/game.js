@@ -22,7 +22,10 @@ define(['character', 'crafty', 'underscore', 'popupManager', 'start'],
       var scene = new StartScene();
       scene.begin();
 
-      new PopupManager().showPopup('TrollIT est un gros TROLL !', function () { console.log('OK'); });
+      PopupManager.showPopup('TrollIT est un gros TROLL !', function () { console.log('OK'); });
+      PopupManager.showPopup('TrollIT est un gros TROLL 2 !');
+      PopupManager.showPopup('TrollIT est un gros TROLL 3 !');
+      PopupManager.showPopup('TrollIT est un gros TROLL 4 !');
     };
 
     Game.prototype.stop = function () {

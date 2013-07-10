@@ -1,8 +1,10 @@
-define(['jquery'], function ($) {
+define(['jquery', 'underscore'], function ($, _) {
 
   'use strict';
 
-  var template = [
+  var isShowingPopup = false,
+  waitingPopups = [],
+  template = [
     '<div id="glass"></div>',
     '<div id="popup">',
     '<div class="popup-header">',
@@ -19,11 +21,26 @@ define(['jquery'], function ($) {
     '</div>'    
   ];
 
-  function compileTemplate(title, content) {
-    var compiled = template.splice(0);
-    compiled[3] = title;
-    compiled[8] = content;
+  function compileTemplate(args) {
+    var compiled = template.slice(0);
+    compiled[3] = args.title;
+    compiled[8] = args.sentence;
     return compiled.join('');
+  }
+
+  function showNext() {
+    if(isShowingPopup === false && waitingPopups.length > 0) {
+      isShowingPopup = true;
+      var data = _.first(waitingPopups);
+      waitingPopups = _.rest(waitingPopups);
+      $(document.body).append(compileTemplate(data));
+      $('#popup .popup-header .popup-header-button').unbind().click(function () {
+        hide(data.callback);
+      });
+      $('#popup .popup-footer .popup-footer-button-valider').unbind().click(function () {
+        hide(data.callback);
+      });
+    }
   }
 
   function hide(callback) {
@@ -32,29 +49,19 @@ define(['jquery'], function ($) {
     if (callback) {
       callback();
     }
+    isShowingPopup = false;
+    showNext();
   }
 
-  return (function () {
-
-    /**
-     * PopupManager
-     * @constructor
-     */
-    function PopupManager() {
-    }
+  return {
 
     /**
      * Display sentence
      */
-    PopupManager.prototype.showPopup = function (sentence, callback) {
-      $(document.body).append(compileTemplate('infos', sentence));
-      $('#popup .popup-header .popup-header-button').unbind().click(function () {
-        hide(callback);
-      });
-      $('#popup .popup-footer .popup-footer-button-valider').unbind().click(function () {
-        hide(callback);
-      });
-    };
+    showPopup: function (sentence, callback) {
+      waitingPopups.push({title: 'infos', sentence: sentence, callback: callback});
+      showNext();
+    }
 
     /**
      * Display choises
@@ -65,7 +72,5 @@ define(['jquery'], function ($) {
     //   choises.
     // };
 
-    return PopupManager;
-
-  })();
+  };
 });
