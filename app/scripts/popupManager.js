@@ -14,9 +14,9 @@ define([], function () {
     /**
      * End of game
      */
-    PopupManager.prototype.showPopup = function(sentence) {
+    PopupManager.prototype.showPopup = function (sentence) {
       window.alert(sentence);
-    }
+    };
 
     return PopupManager;
 
