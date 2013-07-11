@@ -1,4 +1,4 @@
-define(['crafty', 'character', 'underscore', 'jquery'], function (Crafty, character, _) {
+define(['crafty', 'character', 'underscore', 'popupManager', 'garage'], function (Crafty, character, _, PopupManager, garage) {
 
   'use strict';
 
@@ -17,12 +17,15 @@ define(['crafty', 'character', 'underscore', 'jquery'], function (Crafty, charac
           y: 1 * 60 + 10
         });
 
-        transition.delay(function() {
-          _.each(self.characters, function(char) {
-             char.entity.visible = false;
-             char.dialog.visible = false;
+        transition.delay(function () {
+          _.each(self.characters, function (char) {
+            char.entity.visible = false;
+            char.dialog.visible = false;
           });
           this.append('<p class="announcement">C\'est comme ca que débuta le début d\'une... grosse galère</p>');
+          PopupManager.showPopup('Démarrer le jeu ?', function () {
+            garage.start();
+          });
         }, 4000);
 
         self.characters[0].dialog.append('<p class="char-dialog">Bon c\' est décidé je vais créer ma boite et je vais leur montrer moi !</p>');
