@@ -35,19 +35,23 @@ define(['jquery', 'underscore'], function ($, _) {
       waitingPopups = _.rest(waitingPopups);
       $(document.body).append(compileTemplate(data));
       $('#popup .popup-header .popup-header-button').unbind().click(function () {
-        hide(data.callback);
+        hide(data.callback, data.isChoise);
       });
       $('#popup .popup-footer .popup-footer-button-valider').unbind().click(function () {
-        hide(data.callback);
+        hide(data.callback, data.isChoise);
       });
     }
   }
 
-  function hide(callback) {
+  function hide(callback, isChoise) {
+    var callbackData;
+    if (isChoise && callback) {
+      callbackData = $('input[type=radio][name=radioPopup]:checked').attr('value');
+    }
     $('#glass').remove();
     $('#popup').remove();
     if (callback) {
-      callback();
+      callback(callbackData);
     }
     isShowingPopup = false;
     showNext();
@@ -61,7 +65,7 @@ define(['jquery', 'underscore'], function ($, _) {
      * callback : optional callback function with no params
      */
     showPopup: function (sentence, callback) {
-      waitingPopups.push({title: 'infos', sentence: sentence, callback: callback});
+      waitingPopups.push({title: 'Infos', sentence: sentence, callback: callback});
       showNext();
     },
 
@@ -73,11 +77,16 @@ define(['jquery', 'underscore'], function ($, _) {
      */
     showChoises: function (choises, callback) {
       var sentence = '<ul>';
+      var checked = 'checked';
       _.each(choises, function (choise) {
-        sentence += '<li style="list-style:none"><input type="radio" name="radio">' + choise + '</li>';
+        sentence += '<li style="list-style:none">' +
+          '<input type="radio" name="radioPopup" value="' + 
+          choise.value + '"' + checked + '>' + choise.display + 
+          '</li>';
+        checked = '';
       });
       sentence += '</ul>';
-      waitingPopups.push({title: 'infos', sentence: sentence, callback: callback});
+      waitingPopups.push({title: 'infos', sentence: sentence, callback: callback, isChoise: true});
       showNext();
     }
 
